@@ -38,8 +38,12 @@ const fadeInUpVariants = {
   }
 };
 
-export default function App() {
-  const [isIntroComplete, setIsIntroComplete] = useState(false);
+const hasPrerenderedHtml = () =>
+  typeof document !== "undefined" &&
+  document.getElementById("root")?.dataset.prerendered === "true";
+
+export default function App({ prerender = false }: { prerender?: boolean }) {
+  const [isIntroComplete, setIsIntroComplete] = useState(prerender || hasPrerenderedHtml());
   const [scrollPercent, setScrollPercent] = useState(0);
   const [activeSection, setActiveSection] = useState("hero");
   const [activePillar, setActivePillar] = useState<string>("digital");
@@ -148,7 +152,9 @@ export default function App() {
   return (
     <div className="relative min-h-screen bg-brand-dark overflow-hidden font-sans select-none">
       {/* Intro Preloader Loading sequence */}
-      <Preloader onComplete={() => setIsIntroComplete(true)} />
+      {!prerender && !isIntroComplete && (
+        <Preloader onComplete={() => setIsIntroComplete(true)} />
+      )}
 
       {/* Main Experience Layout (renders after preloader completes) */}
       <AnimatePresence>
