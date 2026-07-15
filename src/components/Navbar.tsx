@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { Terminal, Shield, Workflow, Contact, MessageSquarePlus, Activity } from "lucide-react";
+import { pushRouteForSection, scrollToSection } from "../routeUtils";
 
 interface NavbarProps {
   activeSection: string;
@@ -15,10 +16,8 @@ export default function Navbar({ activeSection }: NavbarProps) {
   ];
 
   const handleScrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
+    pushRouteForSection(id);
+    scrollToSection(id);
   };
 
   return (

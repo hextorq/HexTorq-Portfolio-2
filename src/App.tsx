@@ -13,6 +13,8 @@ import PillarShowcase from "./components/PillarShowcase";
 import { soundFx } from "./lib/audio";
 import ParallaxTitle from "./components/ParallaxTitle";
 import BackgroundEffects from "./components/BackgroundEffects";
+import TemplateSwitcher from "./components/TemplateSwitcher";
+import { currentSectionFromPath, pushRouteForSection, scrollToSection } from "./routeUtils";
 
 // Framer Motion layout variants for Intersection Observer staggering
 const sectionContainerVariants = {
@@ -93,6 +95,17 @@ export default function App({ prerender = false }: { prerender?: boolean }) {
     };
   }, [isIntroComplete]);
 
+  useEffect(() => {
+    if (!isIntroComplete || prerender) return;
+    const scrollToCurrentRoute = () => {
+      const section = currentSectionFromPath();
+      if (section) window.setTimeout(() => scrollToSection(section), 80);
+    };
+    scrollToCurrentRoute();
+    window.addEventListener("popstate", scrollToCurrentRoute);
+    return () => window.removeEventListener("popstate", scrollToCurrentRoute);
+  }, [isIntroComplete, prerender]);
+
   // Scroll tracking effect
   useEffect(() => {
     if (!isIntroComplete) return;
@@ -143,10 +156,8 @@ export default function App({ prerender = false }: { prerender?: boolean }) {
 
   const handleScrollToSection = (id: string) => {
     soundFx.click();
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
+    pushRouteForSection(id);
+    scrollToSection(id);
   };
 
   return (
@@ -170,6 +181,7 @@ export default function App({ prerender = false }: { prerender?: boolean }) {
 
             {/* Float Menu Minimalist Header */}
             <Navbar activeSection={activeSection} />
+            <TemplateSwitcher />
 
             {/* Left Vertical HUD Coordinates for 3D tech feel */}
             <div className="fixed left-6 bottom-8 z-30 hidden xl:flex flex-col space-y-4 text-[10px] font-mono text-gray-500 tracking-widest pointer-events-none">
