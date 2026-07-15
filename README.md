@@ -1,40 +1,47 @@
 # HexTorq Portfolio 2
 
-HexTorq Portfolio 2 is an interactive, dashboard-inspired portfolio website for Hextorq. The UI presents the company as a futuristic engineering team with animated sections, product modules, story milestones, and a contact experience styled like a command terminal.
+Production portfolio template for HexTorq.
 
-## Website Experience
+Live site: https://portfolio-2.hextorq.tech/
 
-The page starts with a preloader and then reveals a dark immersive interface. The first screen uses oversized HexTorq branding, glowing gradients, ambient background effects, and a scroll prompt that moves the visitor into the company story.
+## Website Overview
 
-This version feels more like an interactive product demo than a simple business page. It includes HUD-style details, active section tracking, scroll progress indicators, interactive pillar tabs, and product showcase modules.
+HexTorq Portfolio 2 presents the company through an interactive dashboard-style interface. The design feels like a futuristic engineering console with active section tracking, animated modules, product interaction areas, and a contact flow styled like a communication gateway.
 
-## UI Flow
+This version is best suited when HexTorq should feel like a high-tech engineering partner with a strong interactive product-demo character.
 
-The visitor moves through these main areas:
+## Page Flow
 
-1. Hero screen with the HexTorq wordmark, short positioning statement, and two clear action buttons.
-2. About section with company story, credibility stats, and a milestone-style visual.
-3. Services section built around three interactive engineering pillars.
-4. Product section with a selectable product showcase.
-5. Contact section designed as a communication gateway with form states and success feedback.
-6. Footer navigation for quick movement back through the page.
+- Home: oversized HexTorq branding, short positioning, and action buttons.
+- About: company story, stats, and milestone-style visuals.
+- Services: interactive engineering pillars.
+- Products: selectable product showcase.
+- Projects and process routes: mapped into the closest available sections for consistent template switching.
+- Contact: form-style communication terminal with success feedback.
 
-## Visual Direction
+## UI Direction
 
-This version uses a premium cyber-interface style:
+- Dark cyber-interface style with cyan, violet, and amber highlights.
+- Floating navigation and scroll progress details.
+- HUD-style supporting elements for a technical systems feel.
+- Interactive cards and tabs for services and products.
+- Small template-switch control for moving to another HexTorq portfolio style while keeping the same route.
 
-- Dark background with cyan, violet, and amber highlights.
-- Floating navigation that stays minimal while the page scrolls.
-- Left and right HUD elements for a technical systems feel.
-- Animated cards and modules that make the service areas feel explorable.
-- Contact form styled as a secure dispatch terminal.
+## Static Build And SEO
 
-## Best Use
+The project uses Vite with a prerender step. Running the build generates static HTML route folders in `dist/`, so deployed pages can be served directly as HTML, CSS, and JavaScript.
 
-Use this version when Hextorq should feel like a high-tech engineering partner with strong interaction design. It is suitable for presentations, investor-facing demos, product studio pitches, and modern service-company branding where the UI needs to feel alive.
+```bash
+npm install
+npm run build
+```
 
-## Content Notes
+The generated output includes prerendered pages such as `/about/`, `/services/`, `/products/`, `/projects/`, `/process/`, and `/contact/`.
 
-The main page content lives across `src/App.tsx` and the section components inside `src/components`. Update the hero text, company story, service pillar labels, product showcase content, and contact email before final launch.
+## Deployment Notes
 
-The current form visually simulates submission feedback. Connect it to a real contact endpoint or mail workflow before using it as a production contact form.
+This site is intended for Vercel static deployment. The included `vercel.json` allows cross-origin asset loading and iframe embedding from HexTorq domains so the portfolio mix website can preload and display this template.
+
+## Content Editing
+
+The main visible UI is organized across `src/App.tsx` and files inside `src/components`. Update those files for final company wording, service labels, product details, and contact text.
