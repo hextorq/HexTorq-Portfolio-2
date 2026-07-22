@@ -73,6 +73,7 @@ export default function PillarShowcase({ activeTab: propActiveTab, setActiveTab:
   const setActiveTab = propSetActiveTab !== undefined ? propSetActiveTab : setLocalActiveTab;
 
   // State for DIGITAL SOLUTIONS simulation
+  const [systemLatency, setSystemLatency] = useState("2.4");
   const [dbQueries, setDbQueries] = useState(240);
   const [erpLoad, setErpLoad] = useState(42);
   const [recentTransactions, setRecentTransactions] = useState<string[]>([
@@ -98,6 +99,8 @@ export default function PillarShowcase({ activeTab: propActiveTab, setActiveTab:
   // Trigger continuous lightweight metrics variation
   useEffect(() => {
     const timer = setInterval(() => {
+      setSystemLatency((Math.random() * 5 + 1).toFixed(1));
+
       // Vary DB metrics slightly
       setDbQueries(q => Math.max(100, Math.min(500, q + Math.floor(Math.random() * 21) - 10)));
       setErpLoad(l => Math.max(10, Math.min(95, l + Math.floor(Math.random() * 9) - 4)));
@@ -526,7 +529,7 @@ export default function PillarShowcase({ activeTab: propActiveTab, setActiveTab:
                   <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
                   <span>SECURE CONNECTED SOCKETS</span>
                 </span>
-                <span>SYSTEM LATENCY: {(Math.random() * 5 + 1).toFixed(1)}ms</span>
+                <span>SYSTEM LATENCY: {systemLatency}ms</span>
               </div>
             </div>
           </div>
